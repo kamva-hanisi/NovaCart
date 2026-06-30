@@ -7,6 +7,11 @@
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
+    "migrate": "knex migrate:latest --knexfile knexfile.ts",
+    "rollback": "knex migrate:rollback --knexfile knexfile.ts",
+    "seed": "knex seed:run --knexfile knexfile.ts",
+    "migration:make": "knex migrate:make --knexfile knexfile.ts",
+    "seed:make": "knex seed:make --knexfile knexfile.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -22,6 +27,7 @@
     "express-validator": "^7.3.2",
     "helmet": "^8.2.0",
     "jsonwebtoken": "^9.0.3",
+    "knex": "^3.3.0",
     "morgan": "^1.11.0",
     "multer": "^2.2.0",
     "mysql2": "^3.22.5"
@@ -35,6 +41,7 @@
     "@types/morgan": "^1.9.10",
     "@types/multer": "^2.1.0",
     "@types/node": "^26.0.1",
+    "knex-cli": "^1.0.1",
     "prettier": "^3.9.4",
     "tsx": "^4.22.4",
     "typescript": "^6.0.3"
