@@ -3,6 +3,40 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
+# Node
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Environment
+.env
+
+# Build
+dist/
+coverage/
+
+# IDE
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Angular
+.angular/
+
+# Cache
+.cache/
+
+# Uploads
+server/uploads/
+
 # User-specific files
 *.rsuser
 *.suo
