@@ -1,0 +1,12 @@
+DROP DATABASE IF EXISTS novacart_db;
+
+CREATE DATABASE novacart_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+USE novacart_db;
+
+CREATE TABLE roles (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL UNIQUE,
+    description VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
