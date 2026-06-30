@@ -5,7 +5,7 @@ export const registerSchema = z.object({
 
   lastName: z.string().min(2).max(100),
 
-  email: z.email(),
+  email: z.string().email(),
 
   password: z.string().min(8),
 
@@ -13,7 +13,7 @@ export const registerSchema = z.object({
 });
 
 export const loginSchema = z.object({
-  email: z.email(),
+  email: z.string().email(),
 
   password: z.string().min(8),
 });

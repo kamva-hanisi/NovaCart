@@ -3,7 +3,6 @@ import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
-import type { Request, Response } from "express";
 
 import routes from "./routes/index.js";
 import { errorHandler } from "./common/middleware/errorHandler.js";
@@ -29,12 +28,5 @@ app.use("/api/v1", routes);
 
 // Error Handler (must be last)
 app.use(errorHandler);
-
-app.get("/api/v1/health", (_req: Request, res: Response) => {
-  res.status(200).json({
-    success: true,
-    message: "NovaCart API is running 🚀",
-  });
-});
 
 export default app;
