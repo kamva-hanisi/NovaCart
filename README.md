@@ -11,3 +11,6 @@ A modern full-stack e-commerce platform built with Angular, TypeScript, Tailwind
 - Node.js
 - Express.js
 - MySQL
+
+- run frontend ng serve
+- run backend npm run dev
