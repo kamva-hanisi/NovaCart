@@ -40,4 +40,28 @@ export class AuthRepository {
 
     return result.insertId;
   }
+
+  async findUserById(id: number) {
+    const [rows]: any = await pool.query(
+      `
+    SELECT
+      id,
+      first_name,
+      last_name,
+      email,
+      phone,
+      role_id,
+      avatar,
+      status,
+      email_verified,
+      created_at
+    FROM users
+    WHERE id = ?
+    LIMIT 1
+    `,
+      [id]
+    );
+
+    return rows[0] ?? null;
+  }
 }
