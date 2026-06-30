@@ -1,0 +1,13 @@
+<type>(scope): <subject>
+
+Examples
+
+feat(auth): implement login endpoint
+
+fix(cart): correct total calculation
+
+docs(readme): update installation guide
+
+style(home): improve spacing
+
+refactor(products): simplify service
