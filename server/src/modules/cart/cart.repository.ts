@@ -67,6 +67,38 @@ export class CartRepository {
     return rows[0] ?? null;
   }
 
+  async findItemById(userId: number, id: number) {
+    const [rows]: any = await pool.query(
+      `
+      SELECT ci.*
+      FROM carts c
+      JOIN cart_items ci ON ci.cart_id = c.id
+      WHERE c.user_id=?
+      AND ci.id=?
+      LIMIT 1
+      `,
+      [userId, id]
+    );
+
+    return rows[0] ?? null;
+  }
+
+  async findItemByProductId(userId: number, productId: number) {
+    const [rows]: any = await pool.query(
+      `
+      SELECT ci.*
+      FROM carts c
+      JOIN cart_items ci ON ci.cart_id = c.id
+      WHERE c.user_id=?
+      AND ci.product_id=?
+      LIMIT 1
+      `,
+      [userId, productId]
+    );
+
+    return rows[0] ?? null;
+  }
+
   async addItem(cartId: number, productId: number, quantity: number, price: number) {
     await pool.query(
       `
@@ -97,40 +129,48 @@ export class CartRepository {
     );
   }
 
-  async getCart(userId: number) {
-    const [rows]: any = await pool.query(
+  async increase(userId: number, id: number) {
+    const [result]: any = await pool.query(
       `
-    SELECT
-
-      ci.id,
-
-      ci.quantity,
-
-      ci.unit_price,
-
-      (ci.quantity * ci.unit_price) AS subtotal,
-
-      p.id AS product_id,
-
-      p.name,
-
-      p.thumbnail,
-
-      p.stock_quantity
-
-    FROM carts c
-
-    JOIN cart_items ci
-      ON ci.cart_id = c.id
-
-    JOIN products p
-      ON p.id = ci.product_id
-
-    WHERE c.user_id = ?
-    `,
-      [userId]
+      UPDATE cart_items ci
+      JOIN carts c ON c.id = ci.cart_id
+      SET ci.quantity = ci.quantity + 1
+      WHERE c.user_id=?
+      AND ci.id=?
+      `,
+      [userId, id]
     );
 
-    return rows;
+    return result.affectedRows > 0;
+  }
+
+  async decrease(userId: number, id: number) {
+    const [result]: any = await pool.query(
+      `
+      UPDATE cart_items ci
+      JOIN carts c ON c.id = ci.cart_id
+      SET ci.quantity = ci.quantity - 1
+      WHERE c.user_id=?
+      AND ci.id=?
+      `,
+      [userId, id]
+    );
+
+    return result.affectedRows > 0;
+  }
+
+  async remove(userId: number, id: number) {
+    const [result]: any = await pool.query(
+      `
+      DELETE ci
+      FROM cart_items ci
+      JOIN carts c ON c.id = ci.cart_id
+      WHERE c.user_id=?
+      AND ci.id=?
+      `,
+      [userId, id]
+    );
+
+    return result.affectedRows > 0;
   }
 }

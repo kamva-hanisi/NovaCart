@@ -16,4 +16,18 @@ router.post("/", authenticate, asyncHandler(controller.add.bind(controller)));
 
 router.post("/add", authenticate, asyncHandler(controller.add.bind(controller)));
 
+router.patch(
+  "/item/:id/increase",
+  authenticate,
+  asyncHandler(controller.increase.bind(controller))
+);
+
+router.patch(
+  "/item/:id/decrease",
+  authenticate,
+  asyncHandler(controller.decrease.bind(controller))
+);
+
+router.delete("/item/:id", authenticate, asyncHandler(controller.remove.bind(controller)));
+
 export default router;

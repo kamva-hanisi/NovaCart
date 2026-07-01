@@ -56,4 +56,57 @@ export class CartService {
 
     await this.cartRepository.addItem(cart.id, productId, quantity, product.price);
   }
+
+  private async findUserCartItem(userId: number, id: number) {
+    const itemById = await this.cartRepository.findItemById(userId, id);
+
+    if (itemById) {
+      return itemById;
+    }
+
+    return this.cartRepository.findItemByProductId(userId, id);
+  }
+
+  async increase(userId: number, id: number) {
+    const item = await this.findUserCartItem(userId, id);
+
+    if (!item) {
+      throw new AppError("Cart item not found", 404);
+    }
+
+    const updated = await this.cartRepository.increase(userId, item.id);
+
+    if (!updated) {
+      throw new AppError("Cart item not found", 404);
+    }
+  }
+
+  async decrease(userId: number, id: number) {
+    const item = await this.findUserCartItem(userId, id);
+
+    if (!item) {
+      throw new AppError("Cart item not found", 404);
+    }
+
+    if (item.quantity <= 1) {
+      await this.cartRepository.remove(userId, item.id);
+      return;
+    }
+
+    await this.cartRepository.decrease(userId, item.id);
+  }
+
+  async remove(userId: number, id: number) {
+    const item = await this.findUserCartItem(userId, id);
+
+    if (!item) {
+      throw new AppError("Cart item not found", 404);
+    }
+
+    const removed = await this.cartRepository.remove(userId, item.id);
+
+    if (!removed) {
+      throw new AppError("Cart item not found", 404);
+    }
+  }
 }
