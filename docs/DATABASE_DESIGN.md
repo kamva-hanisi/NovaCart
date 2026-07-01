@@ -44,3 +44,24 @@ novacart_db
 - order_items
 - payments
 - reviews
+
+## Completed Tables
+
+- ✅ roles
+- ✅ users
+- ✅ categories
+- ✅ brands
+- ✅ products
+- ✅ product_images
+- ✅ carts
+- ✅ cart_items
+
+## Remaining
+
+- wishlist
+- wishlist_items
+- addresses
+- orders
+- order_items
+- payments
+- reviews
