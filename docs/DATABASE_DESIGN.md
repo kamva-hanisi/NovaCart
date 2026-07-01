@@ -25,21 +25,21 @@ novacart_db
 
 ## Completed Tables
 
-- ✅ roles
-- ✅ users
-
-## Remaining Tables
-
+- roles
+- users
 - categories
 - brands
 - products
 - product_images
+
+## Remaining Tables
+
 - inventory
-- addresses
 - cart
 - cart_items
 - wishlist
 - wishlist_items
+- addresses
 - orders
 - order_items
 - payments
